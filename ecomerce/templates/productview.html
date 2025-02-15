@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% block bg %}
+  <section id="banner" style="background: #F9F3EC;">
+    <div class="container">
+      <div class="swiper main-swiper">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide py-5">
+            <div class="row banner-content align-items-center">
+              <div class="img-wrapper col-12">
+                <img src="{{pro.image.url}}" class="" height="500px" width="1400px">
+              </div>
+<!--              <div class="content-wrapper col-md-5 p-5 mb-5">-->
+<!--                <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>-->
+<!--                <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your-->
+<!--                    pets</span>-->
+<!--                </h2>-->
+<!--                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">-->
+<!--                  shop now-->
+<!--                  <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">-->
+<!--                    <use xlink:href="#arrow-right"></use>-->
+<!--                  </svg></a>-->
+<!--              </div>-->
+
+<!--            </div>-->
+          </div>
+<!--          <div class="swiper-slide py-5">-->
+<!--            <div class="row banner-content align-items-center">-->
+<!--              <div class="img-wrapper col-md-5">-->
+<!--                <img src="{% static 'images//banner-img3.png' %}" class="img-fluid">-->
+<!--              </div>-->
+<!--              <div class="content-wrapper col-md-7 p-5 mb-5">-->
+<!--                <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>-->
+<!--                <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your-->
+<!--                    pets</span>-->
+<!--                </h2>-->
+<!--                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">-->
+<!--                  shop now-->
+<!--                  <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">-->
+<!--                    <use xlink:href="#arrow-right"></use>-->
+<!--                  </svg></a>-->
+<!--              </div>-->
+
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="swiper-slide py-5">-->
+<!--            <div class="row banner-content align-items-center">-->
+<!--              <div class="img-wrapper col-md-5">-->
+<!--                <img src="{% static 'images/banner-img4.png' %}" class="img-fluid">-->
+<!--              </div>-->
+<!--              <div class="content-wrapper col-md-7 p-5 mb-5">-->
+<!--                <div class="secondary-font text-primary text-uppercase mb-4">Save 10 - 20 % off</div>-->
+<!--                <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your-->
+<!--                    pets</span>-->
+<!--                </h2>-->
+<!--                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">-->
+<!--                  shop now-->
+<!--                  <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">-->
+<!--                    <use xlink:href="#arrow-right"></use>-->
+<!--                  </svg></a>-->
+<!--              </div>-->
+
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+
+        <div class="swiper-pagination mb-5"></div>
+
+      </div>
+    </div>
+    </div>
+  </section>
+  {% endblock %}
+{% block content %}
+<section id="clothing" class="my-5 overflow-hidden">
+    <div class="container pb-5">
+
+      <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
+        <h2 class="display-3 fw-normal">{{pro.name}}</h2>
+
+        <div>
+<!--          <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">-->
+<!--            shop now-->
+<!--            <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">-->
+<!--              <use xlink:href="#arrow-right"></use>-->
+<!--            </svg></a>-->
+        </div>
+      </div>
+            <p class="text-warning">{{pro.desc}}</p>
+
+
+      <div class="products-carousel swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
+            </div>
+            <div class="card position-relative">
+              <img src="{{pro.image.url}}" height="200px" width="100%" class="" alt="">
+              <div class="card-body p-0">
+<!--                <a href="single-product.html">-->
+                  <p class="text-center"><small>Available Stock: {{pro.stock}}</small></p>
+                <h5 class="card-title text-center">{{pro.price}}</h5>
+                  {% if user.is_superuser %}
+                  {% if pro.stock > 0 %}
+                  <p>Product in Stock</p>
+                  <a class="btn btn-primary" href="{% url 'shop:addstock' pro.id %}">Add Stock</a>
+                  {% else %}
+                  <p>Product in Stock</p>
+                  <a class="btn btn-primary" href="{% url 'shop:addstock' pro.id %}">Add Stock</a>
+                  {% endif %}
+                  {% else %}
+                  {% if pro.stock > 0 %}
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="{% url 'cart:addtocart' pro.id %}" class="btn btn-primary">Add To Cart</a>
+                  {% else %}
+                  <p>Product Out of Stock</p>
+                  {% endif %}
+                  {% endif %}
+
+<!--                </a>-->
+
+<!--                <div class="card-text ">-->
+<!--                  <span class="rating secondary-font mx-auto">-->
+<!--                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>-->
+<!--                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>-->
+<!--                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>-->
+<!--                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>-->
+<!--                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>-->
+<!--                    5.0</span>-->
+
+<!--                  <h3 class="secondary-font text-primary text-center">$18.00</h3>-->
+
+<!--                  <div class="d-flex flex-wrap mt-3 mx-auto">-->
+<!--                    <a href="" class="btn btn-danger me-3 px-4 pt-3 pb-3">-->
+<!--                      <h5 class="text-uppercase m-0">Shop Now</h5>-->
+<!--                    </a>-->
+<!--&lt;!&ndash;                    <a href="#" class="btn-wishlist px-4 pt-3 ">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </a>&ndash;&gt;-->
+<!--                  </div>-->
+
+
+<!--                </div>-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / products-carousel -->
+
+
+    </div>
+  </section>
+{% endblock %}
